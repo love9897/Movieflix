@@ -25,8 +25,10 @@ class _BottomNavState extends State<BottomNav> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: screens.elementAt(selectedIndex),
+      body: SafeArea(
+        child: Center(
+          child: screens.elementAt(selectedIndex),
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[

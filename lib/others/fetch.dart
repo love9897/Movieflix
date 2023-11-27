@@ -16,3 +16,18 @@ Future<List<Movie>> fetchData() async {
     throw Exception('Failed to load Movie');
   }
 }
+
+List<Movie> searchList = [];
+Future<List<Movie>> searchData(var searchtext) async {
+  final response = await http
+      .get(Uri.parse('https://api.tvmaze.com/search/shows?q=$searchtext'));
+  var shows = jsonDecode(response.body.toString());
+  if (response.statusCode == 200) {
+    for (Map<String, dynamic> index in shows) {
+      searchList.add(Movie.fromJson(index));
+    }
+    return searchList;
+  } else {
+    throw Exception('Failed to load Movie');
+  }
+}
