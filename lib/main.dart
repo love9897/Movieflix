@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Moviesflix',
       theme: ThemeData(
+        colorScheme: const ColorScheme.light(),
         useMaterial3: true,
       ),
       initialRoute: 'splash',

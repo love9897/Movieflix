@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../others/data_model.dart';
+import 'package:netflix_copy/pages/home.dart';
 
 class DetailScreen extends StatefulWidget {
   const DetailScreen({
@@ -99,7 +100,7 @@ class _DetailScreenState extends State<DetailScreen> {
                             color: Colors.black),
                         children: [
                           TextSpan(
-                            text: widget.show!.summary,
+                            text: removeHtmlTags('${widget.show!.summary}'),
                             style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.normal,

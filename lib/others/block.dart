@@ -36,19 +36,25 @@ class SearchScreenBloc extends Bloc<SearchScreenEvent, SearchScreenState> {
   SearchScreenBloc() : super(SearchScreenState.initial()) {
     on<SearchScreenTextChanged>(_onSearchScreenTextChanged);
   }
-
-  Future<void> _onSearchScreenTextChanged(
+  void _onSearchScreenTextChanged(
       SearchScreenTextChanged event, Emitter<SearchScreenState> emit) async {
     final results = await searchData(event.searchText);
     emit(state.copyWith(searchResults: results));
   }
 
-  List<Movie> searchList = [];
-  Future<List<Movie>> searchData(var searchtext) async {
+  Stream<SearchScreenState> mapEventToState(SearchScreenEvent event) async* {
+    if (event is SearchScreenTextChanged) {
+      final results = await searchData(event.searchText);
+      yield state.copyWith(searchResults: results);
+    }
+  }
+
+  Future<List<Movie>> searchData(String searchText) async {
     final response = await http
-        .get(Uri.parse('https://api.tvmaze.com/search/shows?q=$searchtext'));
-    var shows = jsonDecode(response.body.toString());
+        .get(Uri.parse('https://api.tvmaze.com/search/shows?q=$searchText'));
     if (response.statusCode == 200) {
+      final shows = jsonDecode(response.body.toString());
+      List<Movie> searchList = [];
       for (Map<String, dynamic> index in shows) {
         searchList.add(Movie.fromJson(index));
       }

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_copy/others/block.dart';
-import 'package:netflix_copy/others/fetch.dart';
-
-import '../others/data_model.dart';
 import 'detail.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'home.dart';
 
 class Search extends StatelessWidget {
   const Search({super.key});
@@ -77,10 +76,12 @@ class _SearchScreenState extends State<SearchScreen> {
           return Scaffold(
             appBar: AppBar(title: const Text('Search')),
             body: SingleChildScrollView(
+              physics: const NeverScrollableScrollPhysics(),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  //serach Bar
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: SearchAnchor(
@@ -146,6 +147,8 @@ class _SearchScreenState extends State<SearchScreen> {
                           ];
                         }),
                   ),
+
+                  //search view
                   SizedBox(
                     height: contentHeight,
                     child: SingleChildScrollView(
@@ -214,7 +217,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                     child: Padding(
                                       padding: const EdgeInsets.only(left: 4.0),
                                       child: Text(
-                                        '${searchList.summary}',
+                                        removeHtmlTags('${searchList.summary}'),
                                         style: const TextStyle(
                                           fontSize: 12,
                                           color: Colors.black87,

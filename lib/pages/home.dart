@@ -10,6 +10,11 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
+String removeHtmlTags(String htmlText) {
+  RegExp exp = RegExp(r"<[^>]*>", multiLine: true, caseSensitive: true);
+  return htmlText.replaceAll(exp, '');
+}
+
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
@@ -93,7 +98,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Padding(
                               padding: const EdgeInsets.only(left: 4.0),
                               child: Text(
-                                '${movieList[index].show!.summary}',
+                                removeHtmlTags(
+                                    '${movieList[index].show!.summary}'),
                                 style: const TextStyle(
                                   fontSize: 12,
                                   color: Colors.black87,
