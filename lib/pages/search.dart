@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:netflix_copy/others/block.dart';
 import 'detail.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'home.dart';
 
 class Search extends StatelessWidget {

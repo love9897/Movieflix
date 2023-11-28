@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:netflix_copy/others/data_model.dart';
 import 'package:netflix_copy/others/fetch.dart';
 import 'package:netflix_copy/pages/detail.dart';
+import 'package:netflix_copy/pages/search.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -26,7 +27,21 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('home'),
+        title: const Text('Home'),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.search,
+            ),
+            color: Colors.blue,
+            iconSize: 30.0,
+            padding: const EdgeInsets.only(right: 20),
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const SearchScreen()));
+            },
+          ),
+        ],
       ),
       body: FutureBuilder<List<Movie>>(
         future: fetchData(),
